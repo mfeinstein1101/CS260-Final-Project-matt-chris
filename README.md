@@ -8,3 +8,7 @@ Matt and Chris
 ### Matt and Chris: 12-03-24 (1 hour)
 - Collected another data set
 - Began algorithm development, thefts_by_month.ipynb
+
+### Matt 12-04-24 (1 hour)
+- Built a webscraper to construct a 
+- New and most useful data set
