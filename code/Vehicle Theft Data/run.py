@@ -34,6 +34,7 @@ def main():
     table = pd.DataFrame(conf.astype(int))
     print(tabulate(table, headers='keys', tablefmt='simple_grid'))
     print(f'\nAccuracy: {round(np.trace(conf)/np.sum(conf)*100, 3)}% ({int(np.trace(conf))}/{int(np.sum(conf))})\n')
+    print(f'Best feature: {train.best_feature()}\n')
 
 
 def create_partition(df, ave_rate, prod_deciles):
