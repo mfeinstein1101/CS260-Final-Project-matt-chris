@@ -103,7 +103,7 @@ def main(file_path):
     # Output the learned parameters (theta values)
     print("Learned Parameters (Theta):", theta)
 
-# Run the program with your data file
+
 if __name__ == "__main__":
-    file_path = 'data/car data.csv'  # Path to your dataset
+    file_path = 'data/car data.csv'  
     main(file_path)
