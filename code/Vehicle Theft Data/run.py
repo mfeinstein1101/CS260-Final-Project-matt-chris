@@ -17,7 +17,7 @@ def main():
     df = df[features]
     ave_rate = df['rate'].mean()
     prod_deciles = df.production.quantile([0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1])
-
+   # Comment for split data
     train = create_partition(df, ave_rate, prod_deciles)
     model = NaiveBayes(train)
 
