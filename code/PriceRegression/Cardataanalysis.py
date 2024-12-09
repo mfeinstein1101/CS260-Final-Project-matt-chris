@@ -15,7 +15,7 @@ def load_and_preprocess_data(file_path):
     df['Transmission'] = df['Transmission'].map({'Manual': 0, 'Automatic': 1})
     
     # Fill missing values with median for numeric columns only
-    numeric_cols = df.select_dtypes(include=[np.number]).columns  # Get numeric columns
+    numeric_cols = df.select_dtypes(include=[np.number]).columns 
     df[numeric_cols] = df[numeric_cols].fillna(df[numeric_cols].median())
     
     # Select features and target variable
@@ -34,7 +34,7 @@ def scale_features(X):
 # 3. Gradient Descent for Linear Regression
 def gradient_descent(X_train, y_train, alpha=0.01, iterations=1000):
     m = len(y_train)
-    theta = np.zeros(X_train.shape[1])  # Initialize parameters
+    theta = np.zeros(X_train.shape[1])  
     
     cost_history = []
     
@@ -60,6 +60,8 @@ def plot_cost_function(cost_history):
     plt.xlabel('Iterations')
     plt.ylabel('Cost')
     plt.title('Cost function convergence')
+    plt.savefig('code/figures/CostFunctionConverge.pdf')
+
     plt.show()
 
 # 5. Model Evaluation: Predictions and Mean Squared Error
@@ -74,6 +76,7 @@ def plot_actual_vs_predicted(y_test, y_pred_test):
     plt.xlabel('Actual Selling Price')
     plt.ylabel('Predicted Selling Price')
     plt.title('Actual vs Predicted Selling Price')
+    plt.savefig('code/figures/ActualvsPredicted.pdf')
     plt.show()
 
 # Main function to run the entire process

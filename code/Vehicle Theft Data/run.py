@@ -11,30 +11,27 @@ from tabulate import tabulate
 def main(): 
     
     df = pd.read_csv('data/vehicle_theft_data.csv', header=0)
-    
-    features = ['year','manufacturer','make','make/model','production','rate','type']
-
+    features = ['year', 'manufacturer', 'make', 'make/model', 'production', 'rate', 'type']
     df = df[features]
     ave_rate = df['rate'].mean()
     prod_deciles = df.production.quantile([0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1])
-   # Comment for split data
-    train = create_partition(df, ave_rate, prod_deciles)
-    model = NaiveBayes(train)
-
+    test_df = df.sample(frac=0.25)
+    train_df = df
+    train_partition = create_partition(train_df, ave_rate, prod_deciles)
+    test_partition = create_partition(test_df, ave_rate, prod_deciles)
+    model = NaiveBayes(train_partition)
     conf = np.zeros((2, 2))
 
-    for example in train.data:
+    for example in test_partition.data:
         real = example.label
         pred = model.classify(example.features)
-
         conf[real][pred] += 1
-    
-    print('\n\n\n\n\n\n\n')
 
+    print('\n\n\n\n\n\n\n')
     table = pd.DataFrame(conf.astype(int))
     print(tabulate(table, headers='keys', tablefmt='simple_grid'))
     print(f'\nAccuracy: {round(np.trace(conf)/np.sum(conf)*100, 3)}% ({int(np.trace(conf))}/{int(np.sum(conf))})\n')
-    print(f'Best feature: {train.best_feature()}\n')
+    print(f'Best feature: {train_partition.best_feature()}\n')
 
 
 def create_partition(df, ave_rate, prod_deciles):
