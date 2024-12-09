@@ -13,12 +13,16 @@ def main():
     df = pd.read_csv('data/vehicle_theft_data.csv', header=0)
     features = ['year', 'manufacturer', 'make', 'make/model', 'production', 'rate', 'type']
     df = df[features]
+
     ave_rate = df['rate'].mean()
     prod_deciles = df.production.quantile([0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1])
+
     test_df = df.sample(frac=0.25)
     train_df = df
+
     train_partition = create_partition(train_df, ave_rate, prod_deciles)
     test_partition = create_partition(test_df, ave_rate, prod_deciles)
+    
     model = NaiveBayes(train_partition)
     conf = np.zeros((2, 2))
 

@@ -8,10 +8,6 @@ from collections import OrderedDict
 class NaiveBayes:
 
     def __init__(self, part):
-        """
-        TODO: inside the constructor, set up all probabilities that will be
-        necessary for classifying an example later on
-        """
 
         self.K = part.K
         self.n = part.n
@@ -20,7 +16,7 @@ class NaiveBayes:
         self.K_count = [0 for i in range(self.K)]
         self.f_count = [OrderedDict() for i in range(self.K)]
 
-        # Construct feature counts with 0s (pain)
+        # Construct feature counts with 0s
         for dict in self.f_count:
             for feature in list(self.F):
                 dict[feature] = OrderedDict()
@@ -34,10 +30,6 @@ class NaiveBayes:
                 self.f_count[example.label][feature][example.features[feature]] += 1
         
     def classify(self, x_test):
-        """
-        TODO: based on the dictionary of features x_test, return the most
-        likely class (integer)
-        """
 
         probs = []
         for k in range(self.K):
