@@ -1,8 +1,12 @@
 import pandas as pd
+import os
+from dotenv import load_dotenv
 
 def main():
     df = pd.read_csv('data/vehicle_theft_data.csv', header=0)
-    print(row_string(df, 1))
+
+    load_dotenv()
+    print(os.environ['API_KEY'])
 
 
 def row_string(df, idx):
