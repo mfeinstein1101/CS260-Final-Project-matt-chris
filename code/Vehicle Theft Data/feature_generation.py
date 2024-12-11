@@ -1,4 +1,5 @@
 import pandas as pd
+import time
 import os
 from dotenv import load_dotenv
 from openai import OpenAI
@@ -9,12 +10,28 @@ client = OpenAI(api_key=os.environ['API_KEY'])
 def main():
     df = pd.read_csv('data/vehicle_theft_data.csv', header=0)
 
-    for i in range(0, 10):
-        print(get_features(df, i))
+    horsepower, reliability, price = [], [], []
+
+    for idx, row in df.iterrows():
+
+        hp, rel, pr = get_features(row)
+        
+        horsepower.append(hp)
+        reliability.append(rel)
+        price.append(pr)
+
+        print(f'{idx}: {row['year']} {row['make']} {row['make/model']}: ({hp}, {rel}, {pr})')
+
+        time.sleep(0.2)
+    
+    df['Horsepower'] = horsepower
+    df['Reliability'] = reliability
+    df['Price'] = price
+
+    df.to_csv('data/AI_vehicle_theft_data.csv', index=False)
 
 
-def get_features(df, idx):
-    row = df.iloc[idx]
+def get_features(row):
     make, model, year = row['make'], row['make/model'], row['year']
 
     prompt = (
@@ -31,8 +48,8 @@ def get_features(df, idx):
             ]
         )
         content = response.choices[0].message.content
-        hp, rel, price = map(int, content.split(','))
-        return hp, rel, price
+        hp, rel, pr = map(int, content.split(','))
+        return hp, rel, pr
     except Exception as e:
         return 0, 0, 0
 
