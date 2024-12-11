@@ -17,7 +17,11 @@ def get_features(df, idx):
     row = df.iloc[idx]
     make, model, year = row['make'], row['make/model'], row['year']
 
-    prompt = f'Generate the horsepower, reliability index, and and price of a {make} {model} from {year}. Format all of the results as integers separated by commas.'
+    prompt = (
+        f"Provide the horsepower, reliability index, and price for the {year} {make} {model} "
+        "as integers separated by a comma. For example: '250, 85, 17000'. If data is unavailable, return '0, 0, 0'."
+    )
+
     try:
         response = client.chat.completions.create(
             model="gpt-3.5-turbo",
@@ -26,9 +30,11 @@ def get_features(df, idx):
                 {"role": "user", "content": prompt}
             ]
         )
-        return response.choices[0].message.content.strip()
+        content = response.choices[0].message.content
+        hp, rel, price = map(int, content.split(','))
+        return hp, rel, price
     except Exception as e:
-        return f"Error: {e}"
+        return 0, 0, 0
 
 if __name__ == '__main__':
     main()
