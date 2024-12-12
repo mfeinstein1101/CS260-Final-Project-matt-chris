@@ -76,7 +76,8 @@ def main():
     X = scale_features(X)
 
     # Train test split
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+    # X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
     # Train the model using gradient descent
     theta, cost_history = gradient_descent(X_train, y_train, alpha=0.01, iterations=1000)
