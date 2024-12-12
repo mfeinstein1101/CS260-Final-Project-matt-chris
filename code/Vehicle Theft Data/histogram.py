@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 def main():
 
     df = pd.read_csv('data/vehicle_theft_data.csv', header=0)
-    plt.hist(df['rate'], density=True, bins=20)
+    plt.hist(df['rate'], density=True, bins=50)
 
     plt.xlabel('Theft Rate')
     plt.ylabel('Frequency')
