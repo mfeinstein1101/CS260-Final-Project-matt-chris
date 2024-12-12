@@ -5,7 +5,9 @@ from dotenv import load_dotenv
 from openai import OpenAI
 
 load_dotenv()
-# client = OpenAI(api_key=os.environ['API_KEY'])
+# Put this in the constructor to unbrick
+# api_key=os.environ['API_KEY']
+client = OpenAI()
 
 def main():
     df = pd.read_csv('data/vehicle_theft_data.csv', header=0)
