@@ -1,7 +1,3 @@
-"""
-TODO: add header
-"""
-
 from math import log
 from collections import OrderedDict
 

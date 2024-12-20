@@ -10,6 +10,8 @@ def main():
     plt.xlabel('Theft Rate')
     plt.ylabel('Frequency')
     plt.title('Histogram of Theft Rates')
+    
+    plt.savefig('code/figures/histogram.pdf', format='pdf')
     plt.show()
     
 

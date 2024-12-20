@@ -42,6 +42,7 @@ def get_features(row):
     )
 
     try:
+        # The syntax is kinda weird here, but we prompt GPT with the following messages and put the result in content. 
         response = client.chat.completions.create(
             model="gpt-3.5-turbo",
             messages=[

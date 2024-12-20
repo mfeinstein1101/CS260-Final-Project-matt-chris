@@ -1,6 +1,3 @@
-"""
-"""
-
 import pandas as pd
 import math
 from Partition import Partition, Example
@@ -8,6 +5,7 @@ from NaiveBayes import NaiveBayes
 import numpy as np
 from tabulate import tabulate
 
+# Naive Bayes implementation
 def main(): 
     
     df = pd.read_csv('data/vehicle_theft_data.csv', header=0)
@@ -37,7 +35,7 @@ def main():
     print(f'\nAccuracy: {round(np.trace(conf)/np.sum(conf)*100, 3)}% ({int(np.trace(conf))}/{int(np.sum(conf))})\n')
     print(f'Best feature: {train_partition.best_feature()}\n')
 
-
+# This is hardcoded, we could potentially generalize this in the future. But not now.
 def create_partition(df, ave_rate, prod_deciles):
 
     feature_list = list(df)

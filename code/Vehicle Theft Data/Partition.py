@@ -1,6 +1,3 @@
-"""
-"""
-
 from math import log2
 
 class Example:
